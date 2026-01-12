@@ -18,13 +18,13 @@ const Contact = () => {
                             </div>
                             <div className="contact-item">
                                 <span className="icon">📧</span>
-                                <a href="mailto:contact@nafish.dev" className="link">email@example.com</a>
+                                <a href="mailto:mdsheikh6234@gmail.com" className="link">mdsheikh6234@gmail.com</a>
                             </div>
                         </div>
 
                         <div className="social-links">
                             <a href="#" className="social-btn">LinkedIn</a>
-                            <a href="#" className="social-btn">GitHub</a>
+                            <a href="https://github.com/md-alam14" className="social-btn">GitHub</a>
                         </div>
                     </div>
 

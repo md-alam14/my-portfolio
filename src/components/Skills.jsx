@@ -3,10 +3,11 @@ import './Skills.css';
 
 const Skills = () => {
     const skillsData = {
-        "Languages": ["JavaScript", "TypeScript", "Python (Basic)", "Google Apps Script"],
-        "Frameworks": ["NestJS", "ExpressJS", "Node.js"],
+        "Languages": ["JavaScript", "TypeScript", "Python", "Google Apps Script"],
+        "Frameworks & Libraries": ["NestJS", "ExpressJS", "Node.js", "React.js", "Next.js", "React Native", "Expo", "HTML5", "CSS3", "TailwindCSS"],
         "Databases": ["PostgreSQL", "MongoDB", "DynamoDB", "MySQL"],
-        "Tools & Cloud": ["AWS", "Git", "GitHub", "Postman", "Jest", "Playwright"],
+        "Tools & Platforms": ["AWS", "Git", "GitHub", "Postman", "VS Code", "Jest", "Playwright"],
+        "Soft Skills": ["Problem Solving", "Team Collaboration", "Communication", "Adaptability", "Mentoring"]
     };
 
     return (

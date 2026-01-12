@@ -11,7 +11,7 @@ const Hero = () => {
                 <h2 className="role">Software Engineer & Full Stack Enthusiast</h2>
                 <p className="description">
                     Versatile software developer with 3 years of experience crafting innovative and scalable solutions.
-                    Proficient in JavaScript, NestJS, ExpressJS, SQL, and Cloud Technologies including AWS.
+                    Proficient in JavaScript, NestJS, ExpressJS, Node.js, Python, React, React Native, Expo, SQL, and Cloud Technologies including AWS.
                 </p>
                 <div className="hero-buttons">
                     <a href="#projects" className="btn-primary">View Work</a>
