@@ -2,6 +2,30 @@ import React from 'react';
 import './Contact.css';
 
 const Contact = () => {
+    const [formData, setFormData] = React.useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { name, email, message } = formData;
+
+        // Construct mailto URL
+        const subject = `Portfolio Contact from ${name}`;
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+
+        window.location.href = `mailto:mdsheikh6234@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    };
+
     return (
         <section id="contact" className="section contact-section">
             <div className="container">
@@ -28,15 +52,36 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+                    <form className="contact-form" onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <input type="text" placeholder="Name" required />
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                         <div className="form-group">
-                            <input type="email" placeholder="Email" required />
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                         <div className="form-group">
-                            <textarea placeholder="Message" rows="5" required></textarea>
+                            <textarea
+                                name="message"
+                                placeholder="Message"
+                                rows="5"
+                                value={formData.message}
+                                onChange={handleChange}
+                                required
+                            ></textarea>
                         </div>
                         <button type="submit" className="btn-primary">Send Message</button>
                     </form>
