@@ -7,6 +7,7 @@ const Contact = () => {
         email: '',
         message: ''
     });
+    const [status, setStatus] = React.useState(''); // 'sending', 'success', 'error'
 
     const handleChange = (e) => {
         setFormData({
@@ -15,15 +16,39 @@ const Contact = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, message } = formData;
+        setStatus('sending');
 
-        // Construct mailto URL
-        const subject = `Portfolio Contact from ${name}`;
-        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+        try {
+            const response = await fetch("https://formsubmit.co/ajax/mdsheikh6234@gmail.com", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                    _subject: `New Portfolio Message from ${formData.name}`
+                })
+            });
 
-        window.location.href = `mailto:mdsheikh6234@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            const data = await response.json();
+
+            if (data.success === "true" || response.ok) {
+                setStatus('success');
+                setFormData({ name: '', email: '', message: '' });
+                // Reset success message after 5 seconds
+                setTimeout(() => setStatus(''), 5000);
+            } else {
+                setStatus('error');
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setStatus('error');
+        }
     };
 
     return (
@@ -61,6 +86,7 @@ const Contact = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
+                                disabled={status === 'sending'}
                             />
                         </div>
                         <div className="form-group">
@@ -71,6 +97,7 @@ const Contact = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
+                                disabled={status === 'sending'}
                             />
                         </div>
                         <div className="form-group">
@@ -81,9 +108,24 @@ const Contact = () => {
                                 value={formData.message}
                                 onChange={handleChange}
                                 required
+                                disabled={status === 'sending'}
                             ></textarea>
                         </div>
-                        <button type="submit" className="btn-primary">Send Message</button>
+
+                        <button type="submit" className="btn-primary" disabled={status === 'sending'}>
+                            {status === 'sending' ? 'Sending...' : 'Send Message'}
+                        </button>
+
+                        {status === 'success' && (
+                            <p className="status-message success">
+                                ✅ Message sent successfully! I'll get back to you soon.
+                            </p>
+                        )}
+                        {status === 'error' && (
+                            <p className="status-message error">
+                                ❌ Something went wrong. Please try again or email me directly.
+                            </p>
+                        )}
                     </form>
                 </div>
             </div>
